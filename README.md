@@ -3,6 +3,8 @@ For FastCampus tasks
 
 
 
+
+
 0311 과제
 
 - 이름과 나이를 입력 받아 자신을 소개하는 글을 출력하는 함수
@@ -11,6 +13,8 @@ For FastCampus tasks
 - 4과목의 시험 점수를 입력받아 평균 점수를 반환하는 함수
 - 점수(문자 또는 숫자)를 입력받아 학점을 반환하는 함수 만들기 (90점 이상 A, 80점 이상 B, 70점 이상 C, 그 이하 F)
 - 점수(문자 또는 숫자)를 여러 개 입력받아 평균 점수에 대한 학점을 반환하는 함수 만들기 (90점 이상 A, 80점 이상 B, 70점 이상 C, 그 이하 F)
+
+
 
 
 
@@ -25,6 +29,8 @@ For FastCampus tasks
   참고로 피보나치 수열은 이전 두 수의 합이 다음 수가 되는 수열
   (입력된 숫자가 4면 0, 1, 1, 2, 3, 5 ... 에서 4번째 위치인 2 출력.    )
 - 100 이하의 자연수 중 3과 5의 공배수를 모두 출력하는 함수
+
+
 
 
 
@@ -97,6 +103,8 @@ func combineString(str1: String?, str2: String?, str3: String?) -> String {
 
 
 
+
+
 0319 과제
 
 1. 다음과 같은 속성(Property)과 행위(Method)를 가지는 클래스 만들어보기.
@@ -141,6 +149,8 @@ func combineString(str1: String?, str2: String?, str3: String?) -> String {
 
  calculator.divide(10)   // 16
  calculator.reset()      // 0
+
+
 
 
 
