@@ -1,5 +1,5 @@
 # Task
-FastCampus tasks
+FastCampus IOS School Tasks
 
 ***
 
@@ -51,16 +51,17 @@ FastCampus tasks
 
 **0315 과제**
 
-1. 객체 지향 프로그래밍 (Object-Oriented Programming) 에 대해 예습하기
-2. 지난 과제에서 함수를 이용해 풀었던 문제를 클로저로 변형해서 풀어보기
-3. 클로저 Full Syntax <-> Optimized Syntax 변환 연습
+- 객체 지향 프로그래밍 (Object-Oriented Programming) 에 대해 예습하기
+
+- 지난 과제에서 함수를 이용해 풀었던 문제를 클로저로 변형해서 풀어보기
+
+- 클로저 Full Syntax <-> Optimized Syntax 변환 연습
 
 // 위 1 ~ 3번은 자율 학습, 4 ~ 5번은 일요일 밤까지 제출
 // 제출 : 일요일 밤까지 과제 제출용 폴더에 Playground 파일 업로드
 // 정답 풀이는 월요일 전달
 
-4. 
-  아래 두 클로저를 Syntax Optimization을 이용하여 최대한 줄여보기
+- 아래 두 클로저를 Syntax Optimization을 이용하여 최대한 줄여보기
 
 let someClosure: (String, String) -> Bool = { (s1: String, s2: String) -> Bool in
   let isAscending: Bool
@@ -80,9 +81,7 @@ let otherClosure: ([Int]) -> Int = { (values: [Int]) -> Int in
   return count
 }
 
-5. 
-  옵셔널 타입의 문자열 파라미터 3개를 입력받은 뒤, 옵셔널을 추출하여 Unwrapped 된 하나의 문자열로 합쳐서 반환하는 함수
-
+- 옵셔널 타입의 문자열 파라미터 3개를 입력받은 뒤, 옵셔널을 추출하여 Unwrapped 된 하나의 문자열로 합쳐서 반환하는 함수
 
 func combineString(str1: String?, str2: String?, str3: String?) -> String {
   // code
