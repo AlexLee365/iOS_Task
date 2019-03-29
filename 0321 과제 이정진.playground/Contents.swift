@@ -19,6 +19,8 @@ animal.brain
 animal.legs
 
 
+
+
 class Human : Animal {
     
     init(legs: Int = 2) {
@@ -41,6 +43,18 @@ class Pet : Animal {
 var pet = Pet()
 pet.fleas
 pet.legs
+
+
+class Pet2 : Animal {
+    var fleas : Int
+    
+    init (fleas: Int = 0, legs : Int = 4) {
+        self.fleas = fleas
+        super.init ()
+        
+    }
+}
+
 
 
 class Dog : Pet {

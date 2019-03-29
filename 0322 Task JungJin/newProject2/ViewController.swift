@@ -19,6 +19,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var switching: UISwitch!
     
+    
+    
     @IBOutlet weak var segementValue: UISegmentedControl!
     
     override func viewDidLoad() {
@@ -35,6 +37,8 @@ class ViewController: UIViewController {
         switchStateLabel.text = "ON"
         
         segmentLabel.text = "First"
+        
+        
         
     }
     
@@ -63,7 +67,11 @@ class ViewController: UIViewController {
     
     
     
+    
+    
     @IBAction func segValueChanged(_ sender: Any) {
+        
+        
         
         switch segementValue.selectedSegmentIndex {
         case 0 :
