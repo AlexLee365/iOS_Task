@@ -215,13 +215,12 @@ AlertController 에 TextField 를 추가해서 Label 의 숫자를 원하는 대
 
 **0402 과제**
 
-1.
-func addTwoValues(a: Int, b: Int) -> Int {
-  return a + b
-}
-let task1: Any = addTwoValues(a: 2, b: 3)
-위와 같이 task1 이라는 변수가 있을 때
-task1 + task1 의 결과가 제대로 출력되도록 할 것
+1. func addTwoValues(a: Int, b: Int) -> Int {
+     return a + b
+   }
+   let task1: Any = addTwoValues(a: 2, b: 3)
+   위와 같이 task1 이라는 변수가 있을 때
+   task1 + task1 의 결과가 제대로 출력되도록 할 것
 
 2. 스토리보드 이용할 것
 - FirstVC 에 Dog, Cat, Bird 라는 이름의 Button을 3개 만들고 숫자를 표시하기 위한 Label 하나 생성
@@ -232,20 +231,54 @@ task1 + task1 의 결과가 제대로 출력되도록 할 것
   (전환 횟수가 초과된 버튼은 그것만 막고, 횟수가 초과되지 않은 버튼으로는 전환 가능)
 - 그리고 SecondVC 에 추가로 UIButton 을 하나 더 생성하여 그 버튼을 누를 때마다 전환 횟수를 계산하는 값이 개와 고양이, 새 모두에 대해 1회씩 추가되도록 구현
 
-3. 
-- FirstVC 에 텍스트가 -1인 UILabel 과 SecondVC 를 띄우기 위한 UIButton 생성
-- SecondVC 에는 4개(10, 20, 30, 40)의 segment를 가진 UISegmentedControl,
-  그리고 FirstVC 로 돌아가기 위한 UIButton 생성
-  UISegmentedControl 에서 값을 선택한 뒤 버튼을 누르면 그 값이 FirstVC 의 Label 에 표시되도록 구현
+3. - FirstVC 에 텍스트가 -1인 UILabel 과 SecondVC 를 띄우기 위한 UIButton 생성
+
+   - SecondVC 에는 4개(10, 20, 30, 40)의 segment를 가진 UISegmentedControl,
+     그리고 FirstVC 로 돌아가기 위한 UIButton 생성
+     UISegmentedControl 에서 값을 선택한 뒤 버튼을 누르면 그 값이 FirstVC 의 Label 에 표시되도록 구현
 
 [ 도전 과제 ]
-1.
-let task2: Any = addTwoValues
-위와 같이 task2 라는 변수가 있을 때
-task2 + task2 의 결과가 제대로 출력되도록 할 것 (addTwoValues의 각 파라미터에는 2와 3 입력)
 
-2.
-class Car {}
-let values: [Any] = [0, 0.0, (2.0, Double.pi), Car(), { (str: String) -> Int in str.count }]
+1. let task2: Any = addTwoValues
+   위와 같이 task2 라는 변수가 있을 때
+   task2 + task2 의 결과가 제대로 출력되도록 할 것 (addTwoValues의 각 파라미터에는 2와 3 입력)
 
-위 values 변수의 각 값을 switch 문과 타입캐스팅을 이용해 출력하기
+2. class Car {}
+   let values: [Any] = [0, 0.0, (2.0, Double.pi), Car(), { (str: String) -> Int in str.count }]
+
+   위 values 변수의 각 값을 switch 문과 타입캐스팅을 이용해 출력하기
+
+
+
+<br/>
+
+**0404 과제**
+
+[ 과제 ]
+
+1. 
+  FirstVC 의 TextField 에 입력한 값을 SecondVC 의 Label에 표시하기
+
+  - UserDefaults 를 이용한 방법으로 구현
+
+  - Singleton 을 이용한 방법으로 구현
+
+  - Delegate 를 이용한 방법으로 구현
+
+[ 도전 과제 ]
+
+1. Singleton 플레이그라운드에서 Singleton 을 사용하지 않고 
+  User 객체에 친구를 추가하는 방식 구현해보기
+  (1번 도전 과제 심화: User 가 class 일 때, User 가 struct 일 때를 구분해서 구현해보기)
+
+2. 일반 과제 1번에서
+  delegate 프로토콜과 프로퍼티를 firstVC 에 정의하여 구현했다면 secondVC에,
+  이것을 secondVC에 정의해 구현했다면 반대로 firstVC에 정의하여 1번 문제 다시 해결하기
+
+3. Singleton 에 red, green, blue 변수 생성.
+
+   firstview 에 UISlider 를 세개 생성하고 슬라이더 각각의 값을 Singleton 에 각각 저장.
+
+   secondview 에 backgroundcolor 를 singleton 에서 red, green, blue 값을 참조하여 보여주세요.
+
+   (코드로 구현하시오.)
