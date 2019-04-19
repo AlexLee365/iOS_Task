@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  DelegateSingletonTask
+//  LoginAppEX
 //
-//  Created by Alex Lee on 04/04/2019.
+//  Created by Alex Lee on 05/04/2019.
 //  Copyright © 2019 Alex Lee. All rights reserved.
 //
 
@@ -12,16 +12,48 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+//    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
+    
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        var loginState = UserDefaults.standard.bool(forKey: "LoginState")
         
         
+        if loginState == true {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)      // 스토리보드를 객체로 받아와야 스토리보드상에서 만든 모든내용들을 가지고 쓸수있음
+            storyboard.instantiateInitialViewController()         // 스토리보드에서 화살표가 지정된 뷰컨트롤러 불러오기
+            guard let secondVC = storyboard.instantiateViewController(withIdentifier: "SecondViewController") as? SecondViewController else {return true}      // Identifier에 지정된 내용으로 뷰컨트롤러 불러오기
+            guard let firstVC = storyboard.instantiateViewController(withIdentifier: "ViewController") as? ViewController else {return true}
+            
+          
+            
+            UserDefaults.standard.set(false, forKey: "LoginState")
+            
+            window = UIWindow(frame: UIScreen.main.bounds)
+            window?.backgroundColor = .white
+            
+            window?.rootViewController = secondVC
+            window?.makeKeyAndVisible()
+        }
+        
+        
+        
+//        secondVC.count        //이렇게 스토리보드상에서 만들어진 뷰컨트롤러에 접근할수있음
+//        present(secondVC, animated : true)
         
         return true
     }
+    
+//    func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+//        return true
+//    }
+//    func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+//        return true
+//    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

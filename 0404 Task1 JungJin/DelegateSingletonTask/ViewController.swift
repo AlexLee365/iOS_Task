@@ -28,31 +28,60 @@ import UIKit
 //    var labelString = ""
 //}
 
-class ViewController: UIViewController {
+
+
+
+
+class ViewController: UIViewController, SecondViewControllerDelegate {
+    
+    //var secondVC : SecondViewController()
+    
     
     var inputString = ""
+    
+//    weak var delegate : SecondViewController!
 
     
     @IBOutlet weak var textField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        guard let secondVC = storyboard?.instantiateViewController(withIdentifier: "SecondVC") as? SecondViewController else { return }
+
+        secondVC.delegate = self
+        
+//        secondVC. =
+        
+        
         
 //        textField.delegate = self
         
     }
+    
+    
+    func labelCovered () -> String {            // 델리게이트 함수
+        return inputString
+    }
+    
 
     @IBAction func unwindToFirstViewController(_ unwindSegue: UIStoryboardSegue) {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        guard let secondVC = segue.destination as? SecondViewController else {return}         // extension delegate로 이용해서 해봄 (정답이아님)
+        guard let secondVC = segue.destination as? SecondViewController else {return}         // extension delegate로 이용해서 해봄 (정답이아님)
 //        secondVC.labelString = inputString
+      secondVC.delegate = self
+        
+        
+        
         
     }
     @IBAction func tfEditingChangfed(_ sender: UITextField) {
 //        UserDefaults.standard.set(sender.text, forKey: "inputText")     // UserDefaults 사용
 //        LabelString.staticLabelString.labelString = sender.text ?? ""     // Singleton 객체 사용
+        inputString = sender.text ?? ""
+        
     }
     
     @IBAction func textFieldEditingDidEnd(_ sender: UITextField) {

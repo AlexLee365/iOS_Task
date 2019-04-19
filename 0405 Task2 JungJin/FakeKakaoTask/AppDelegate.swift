@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  DelegateSingletonTask
+//  FakeKakaoTask
 //
-//  Created by Alex Lee on 04/04/2019.
+//  Created by Alex Lee on 06/04/2019.
 //  Copyright © 2019 Alex Lee. All rights reserved.
 //
 
@@ -15,7 +15,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.backgroundColor = .white
+        
+        let firstVC = ViewController()
+        firstVC.title = "FirstVC"
+        let tabBarController = UITabBarController()
+        
+        let secondVC = SecondViewController()
+        secondVC.title = "SecondVC"
+        
+        
+        let navigateController = UINavigationController(rootViewController: firstVC)
+        tabBarController.viewControllers = [navigateController, secondVC]
+        
+        
+        
+        firstVC.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 0)
+        secondVC.tabBarItem = UITabBarItem(tabBarSystemItem: .downloads, tag: 1)
+        
+        
+        
+        
+        window?.rootViewController = tabBarController
+        
+        window?.makeKeyAndVisible()
+        
         
         
         

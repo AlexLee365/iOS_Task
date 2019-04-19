@@ -282,3 +282,140 @@ AlertController 에 TextField 를 추가해서 Label 의 숫자를 원하는 대
    secondview 에 backgroundcolor 를 singleton 에서 red, green, blue 값을 참조하여 보여주세요.
 
    (코드로 구현하시오.)
+
+
+
+
+
+<br/>
+
+**0405과제**
+
+[ 로그인 페이지 필수 구현 기능 ]
+
+1. 이미지와 동일하게 UI 구현  (스토리보드와 코드 자유)
+2. 텍스트 필드는 UITextFieldDelegate 이용
+3. 키보드에 textField 가 가릴 수 있으므로 키보드가 나타날 때는 텍스트필드 위로 끌어올리고 내려갈 때는 같이 내려가기
+4. 미리 설정해둔 아이디와 비밀번호가 동일할 경우 로그인이 완료된 메인 화면으로 이동 
+5. 메인 화면에서는 입력받은 아이디를 출력하는 Label 을 띄우고 다시 로그인 화면으로 돌아갈 수 있는 Sign Out 버튼 구성
+
+[ 로그인 페이지 옵션 기능 ]
+
+1. 미리 설정해둔 아이디와 비밀번호가 다를 경우 텍스트필드의 바탕화면을 일시적으로 빨갛게 만들었다가 원상 복구하기
+
+(아래 2 ~ 3번은 delegate 메서드로 구현하기 어려워하실 것이므로 editingChanged를 이용해 먼저 구현)
+(더 해보고 싶을 때 delegate 메서드로 추가 고민)
+
+2. 텍스트필드에 입력할 수 있는 최대 글자 수는 20자까지
+3. 아이디와 비밀번호는 모두 4 ~ 16자 사이여야 함  
+
+
+[ 도전 과제 ]
+
+1. 자동 로그인
+  한 번 로그인에 성공했으면 Sign Out을 하기 전에는 앱을 껏다 켜도 자동 로그인된 상태로 메인 화면으로 진입
+  (AppDelegate 접근 방법 참고)
+  (let appDelegate = UIApplication.shared.delegate as! AppDelegate)
+
+2. 회원가입 페이지를 만든 뒤 회원 가입한 유저의 아이디와 비밀번호를 추가하고
+   그것으로도 로그인 할 수 있도록 구현하기
+
+
+
+[클매과제] 짝퉁카카오
+
+영상과 같이 코드로 구현하시오.
+
+1. UITabbarController에 두개의 ViewController를 생성
+2. 첫번째 ViewController 에 UINavigationController 연결, 친구목록을 표현할 UILabel 생성
+3. 친구추가 ViewController 에서 UITextField 를 생성하고 이름을 입력
+4. TextField 에 입력된 값에 따라 AlertController 띄우기
+5. 첫번째 ViewController 에 돌아왔을때 친구목록 Label 에 이름 표시
+
+ps. (도전과제) 추가된 친구의 이름을 델리게이트패턴으로 구현해주세요~
+
+
+
+<br/>
+
+**0409 과제**
+
+[ 과제 ]
+1. 오토레이아웃 연습해보기 (별도 이미지 참고)
+- 5개의 뷰를 생성하고 높이는 150으로 통일
+- Safe Area Top 과 60 의 거리
+- 가장 왼쪽의 뷰는 leading 20, 가장 오른쪽의 뷰는 trailing 20으로 설정하고 각 view 간의 거리는 8로 고정
+- 각 위치에서 오른쪽에 있는 뷰는 왼쪽 뷰 width 의 0.7배에서 해당 위치의 인덱스만큼 뺀 값을 width 값으로 지님
+  e.g.
+  2번째 뷰의 width는 1번째 뷰 width의 0.7배보다 1 작게 설정
+  3번째 뷰의 width는 2번째 뷰 width의 0.7배보다 2 작게 설정
+
+[ 도전 과제 ]
+
+1. 1차 테스트 3번 과제에서 스토리보드로 프레임 잡은 객체들에 대해 오토레이아웃 적용해보기
+
+- 노란색 워닝이 나오지 않도록 모두 조정해보기
+
+[클매과제]
+
+*UIAlertController 와 비슷한 기능을 구현해봅시다.
+
+1. FirstViewController 에서 버튼을 생성하고 present 를 통해 SecondVIewController 를 띄운다
+2. 회색의 UIView 를 하나 생성하고 안에 색을 바꿀수있는 버튼과 FirstViewController 로 돌아올수있는 버튼을 구현하라.
+
+FirstViewController 에서 SecondViewController 를 Present 할때
+
+```swift
+secondVC.modalPresentationStyle = .overCurrentContext
+present(secondVC, animated: true)
+=> 위 코드 작성
+```
+
+~~~swi
+secondVC.modalPresentationStyle = .overCurrentContext
+=> present 하게 되었을때 이전 ViewController 를 뒤에 보여줍니다.
+~~~
+
+
+
+<br/>
+
+**0411 과제**
+
+1. 생성자 구현
+- Vehicle 클래스에 지정 이니셜라이져(Designated Initializer) 추가
+- Car 클래스에 modelYear 또는 numberOfSeat가 0 이하일 때 nil을 반환하는 Failable Initializer 추가
+- Bus 클래스에 지정 이니셜라이져를 추가하고, maxSpeed를 100으로 기본 할당해주는 편의 이니셜라이져 추가
+
+class Vehicle {
+  let name: String
+  let maxSpeed: Int
+}
+
+class Car: Vehicle {
+  var modelYear: Int
+  var numberOfSeats: Int
+}
+
+class Bus: Vehicle {
+  let isDoubleDecker: Bool
+}
+
+2. UIScrollView 에 UIPageControl을 사용하여 현재 페이지를 표시하는 화면 만들기 (별도 이미지 참고)
+  힌트 
+- UIScrollView: Delegate 이용(scroll 관련),  pagingEnabled 속성 참고
+- UIPageControl: currentPage 속성 및 numberOfPages 속성 참고
+
+
+
+**0415 과제**
+
+아이폰 구매 테이블뷰 만들기
+
+- 스크롤이 가능하도록 아이템 최소 15개이상 생성
+
+- 각 아이템은 한정된 재고수량을 가지도록 설정
+
+- 버튼을 통해 해당아이템의 주문수량을 늘리려고할때 재고수량을 초과하면 셀 배경색을 일시적으로 빨갛게 만들고
+
+  추가로 주문 불가 메시지 출력

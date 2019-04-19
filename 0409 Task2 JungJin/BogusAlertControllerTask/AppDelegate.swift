@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  DelegateSingletonTask
+//  BogusAlertControllerTask
 //
-//  Created by Alex Lee on 04/04/2019.
+//  Created by Alex Lee on 10/04/2019.
 //  Copyright © 2019 Alex Lee. All rights reserved.
 //
 
@@ -16,10 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        
-        
-        
         return true
     }
 

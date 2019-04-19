@@ -1,34 +1,21 @@
 //
 //  SecondViewController.swift
-//  DelegateSingletonTask
+//  BogusAlertControllerTask
 //
-//  Created by Alex Lee on 04/04/2019.
+//  Created by Alex Lee on 10/04/2019.
 //  Copyright © 2019 Alex Lee. All rights reserved.
 //
 
 import UIKit
 
-protocol SecondViewControllerDelegate : class {
-    func labelCovered () -> String
-}
-
 class SecondViewController: UIViewController {
 
-    @IBOutlet weak var resultLabel: UILabel!
-    var labelString = ""
-    
-    weak var delegate : SecondViewControllerDelegate?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-//        labelString = UserDefaults.standard.string(forKey: "inputText") ?? ""     // UserDefaults 사용
-//        resultLabel.text = labelString
         
-//        resultLabel.text = LabelString.staticLabelString.labelString       // Singleton객체 사용
         
-        resultLabel.text = delegate?.labelCovered()
     }
     
 
@@ -41,5 +28,17 @@ class SecondViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    
+    @IBAction func yellowButtonClicked(_ sender: Any) {
+        guard let firstVC = presentingViewController as? ViewController else {return}
+        firstVC.view.backgroundColor = .yellow
+        
+    }
+    
+    @IBAction func whiteButtonClicked(_ sender: Any) {
+        guard let firstVC = presentingViewController as? ViewController else {return}
+        firstVC.view.backgroundColor = .white
+        
+    }
 }
