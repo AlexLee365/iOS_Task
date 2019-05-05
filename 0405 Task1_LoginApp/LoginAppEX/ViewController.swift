@@ -45,6 +45,7 @@ class ViewController: UIViewController {
 //    }
     
     @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var ContainerView: UIView!
     
     @IBOutlet weak var emailTextField: UITextField!
@@ -68,6 +69,7 @@ class ViewController: UIViewController {
         
         ContainerView.backgroundColor = .white
         signInButton.layer.cornerRadius = 5
+        signupButton.layer.cornerRadius = 5
         
     }
     

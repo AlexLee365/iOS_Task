@@ -20,6 +20,10 @@ class AddFriendViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "친구추가창"
+        navigationController?.navigationBar.prefersLargeTitles = false
+        
 
         inputTextField.frame = CGRect(x: view.frame.width/2-100, y: 250, width: 200, height: 50)
         view.addSubview(inputTextField)

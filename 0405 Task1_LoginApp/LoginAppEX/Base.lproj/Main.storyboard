@@ -136,6 +136,7 @@
                         <outlet property="emailTextField" destination="Fzs-73-D1v" id="fpW-Zx-5ui"/>
                         <outlet property="pwTextField" destination="us1-51-ezs" id="na9-rH-uaw"/>
                         <outlet property="signInButton" destination="yJb-8D-gPg" id="Q5v-GF-XJj"/>
+                        <outlet property="signupButton" destination="sNI-Mr-ClO" id="EI4-34-IQo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

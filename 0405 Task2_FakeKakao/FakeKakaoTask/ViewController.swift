@@ -39,14 +39,14 @@ class ViewController: UIViewController {
         
         friendListLabel.frame = CGRect(x: 50, y: 250, width: view.frame.width-100, height: view.frame.height-500)
         
-//        friendListLabel.frame = CGRect(x: 50+friendListView.frame.width/2-50, y: 250, width: 100, height: view.frame.height-600)
+        //        friendListLabel.frame = CGRect(x: 50+friendListView.frame.width/2-50, y: 250, width: 100, height: view.frame.height-600)
         
         friendListLabel.textColor = .black
         friendListLabel.backgroundColor = .cyan
         friendListLabel.textAlignment = .center
         
         view.addSubview(friendListLabel)
-//        friendListLabel.backgroundColor = .yellow
+        //        friendListLabel.backgroundColor = .yellow
         
         
         title = "Friend"
@@ -55,13 +55,13 @@ class ViewController: UIViewController {
         if #available(iOS 11.0, *) {        // ios 11이상만 기능 구현 되도록? 해준부분???
             navigationController?.navigationBar.prefersLargeTitles = true
         }
-            let barButton = UIBarButtonItem(title: "Add Friends", style: .done, target: self, action: #selector(pushViewController(_:)))
-            navigationItem.rightBarButtonItem = barButton       // addsubview가 아닌 네비게이션 아이템 => "오른쪽버튼 = 넣어줄 버튼"
-        }
+        let barButton = UIBarButtonItem(title: "Add Friends", style: .done, target: self, action: #selector(pushViewController(_:)))
+        navigationItem.rightBarButtonItem = barButton       // addsubview가 아닌 네비게이션 아이템 => "오른쪽버튼 = 넣어줄 버튼"
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         
-//        friendListLabel.lineBreakMode = .byWordWrapping
+        //        friendListLabel.lineBreakMode = .byWordWrapping
         
         
         

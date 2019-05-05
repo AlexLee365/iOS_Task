@@ -20,9 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = .white
         
+        let tabBarController = UITabBarController()
+        
         let firstVC = ViewController()
         firstVC.title = "FirstVC"
-        let tabBarController = UITabBarController()
         
         let secondVC = SecondViewController()
         secondVC.title = "SecondVC"
