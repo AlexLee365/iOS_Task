@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     var squarePolyline: MKOverlay?
+    var destinationPolyline: MKOverlay?
     
     
     override func viewDidLoad() {
@@ -29,9 +30,20 @@ class ViewController: UIViewController {
     }
     
     func setRegion(coordinate: CLLocationCoordinate2D) {
-        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        let span = MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
         let region = MKCoordinateRegion(center: coordinate, span: span)
         mapView.setRegion(region, animated: true)
+    }
+    
+    func moveToAnnotation(annotationTitle: String) {
+        guard !mapView.annotations.isEmpty else {return}
+        
+        let annotation = mapView.annotations.filter{ $0.title == annotationTitle }
+        
+//        setRegion(coordinate: annotation.first!.coordinate)
+        mapView.setRegion(MKCoordinateRegion(
+            center: annotation.first!.coordinate,
+            span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)), animated: true)
     }
     
     @IBAction func adressTFEditingDidBegin(_ sender: Any) {
@@ -125,22 +137,14 @@ class ViewController: UIViewController {
         destinationsPoint.append(destinationCoordinate)
         print("●●●●●● : 현재 목적지 좌표 추가됨")
         
-        let destinationPolyline = MKPolyline(coordinates: destinationsPoint, count: destinationsPoint.count)
-        mapView.addOverlay(destinationPolyline)
+        destinationPolyline = MKPolyline(coordinates: destinationsPoint, count: destinationsPoint.count)
+        mapView.addOverlay(destinationPolyline!)
         
         priorDestinationCoordinate = destinationCoordinate
     }
     
     
-    func moveToAnnotation(annotationTitle: String) {
-        guard !mapView.annotations.isEmpty else {return}
-        //    let random = Int.random(in: 0..<mapView.annotations.count)
-        //    let annotation = mapView.annotations[random]
-        //    setRegion(coordinate: annotation.coordinate)
-        
-        let annotation = mapView.annotations.filter{ $0.title == annotationTitle }
-        setRegion(coordinate: annotation.first!.coordinate)
-    }
+   
     
 }
 
@@ -150,16 +154,16 @@ extension ViewController: MKMapViewDelegate {
         print("●●●●●● mapView : ", mapView)
         print("●●●●●● overlay : ", overlay)
         
-        if let squarePolyline = overlay as? MKPolyline {
-            let renderer = MKPolylineRenderer(polyline: squarePolyline)
-            renderer.strokeColor = .red
+        
+        
+        if let polyline = overlay as? MKPolyline {
+            let renderer = MKPolylineRenderer(polyline: polyline)
+            if overlay.isEqual(destinationPolyline) {
+                renderer.strokeColor = .cyan
+            } else {
+                renderer.strokeColor = .red
+            }
             renderer.lineWidth = 1
-            return renderer
-        }
-        if let destinationPolyline = overlay as? MKPolyline {
-            let renderer = MKPolylineRenderer(polyline: destinationPolyline)
-            renderer.strokeColor = .blue
-            renderer.lineWidth = 2
             return renderer
         }
         
