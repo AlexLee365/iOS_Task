@@ -69,7 +69,6 @@ class ViewController: UIViewController {
         let addr = inputAddress
         geocoder.geocodeAddressString(addr, completionHandler: { (placeMark, error) in      // 다시 좌표계로 변환해서 출력
             
-            
             if error != nil {
                 checkError = true
                 return print("●●●●●● Error 발생 : ", error!.localizedDescription)
@@ -89,7 +88,6 @@ class ViewController: UIViewController {
             self.mapView.addAnnotation(annotation)
             
             self.moveToAnnotation(annotationTitle: annotation.title ?? "")
-            
             
             if self.squarePolyline != nil {
                 self.mapView.removeOverlay(self.squarePolyline!)
@@ -153,8 +151,6 @@ extension ViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         print("●●●●●● mapView : ", mapView)
         print("●●●●●● overlay : ", overlay)
-        
-        
         
         if let polyline = overlay as? MKPolyline {
             let renderer = MKPolylineRenderer(polyline: polyline)

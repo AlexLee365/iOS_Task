@@ -435,6 +435,26 @@ class Bus: Vehicle {
 
 <br/>
 
+**0507 과제**
+
+[ 과제 ]
+
+GestureRecognizerExample 프로젝트의 TouchViewController 에서
+터치 후 최초 이동 시 부자연스럽게 움직이는 부분을 자연스럽게 움직이도록 구현하기
+
+[ 도전 과제 ]
+샘플 영상을 보고 동일하게 동작하도록 구현
+touchesBegan 메서드 이용
+
+UITapGestureRecognizer 이용
+이전에 탭한 위치에서 거리가 10 이상이면 새로운 탭인 것으로 계산
+
+
+
+
+
+<br/>
+
 **0510 과제**
 
 [ 과제 ]
