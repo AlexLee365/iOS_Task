@@ -15,11 +15,17 @@ class ViewController: UIViewController {
     let itunesTableView = UITableView()
     let searchController = UISearchController(searchResultsController: nil)
     
+    let activityIndicatorView = UIActivityIndicatorView()
+    
     var data = [Song]()
     var inputText = ""
     
+    let notiCenter = NotificationCenter.default
+    let notiName = "DidRecieveWhenGettingDataCompleted"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         view.addSubview(itunesTableView)
         itunesTableView.frame = view.frame
@@ -35,8 +41,16 @@ class ViewController: UIViewController {
         searchController.searchBar.placeholder = "음악을 검색하세요"
         //        searchController.obscuresBackgroundDuringPresentation = false
         
+        view.addSubview(activityIndicatorView)
+        view.bringSubviewToFront(activityIndicatorView)
+        activityIndicatorView.center = CGPoint(x: itunesTableView.center.x, y: itunesTableView.frame.minY + 100)
+        print(activityIndicatorView.frame)
+        print(searchController.searchBar.frame)
+        activityIndicatorView.frame.size = CGSize(width: 20, height: 20)
+        activityIndicatorView.color = .blue
         
         
+        notiCenter.addObserver(self, selector: #selector(didReceiveWhenGettingDataCompleted), name: Notification.Name(rawValue: notiName), object: nil)
     }
     
     
@@ -60,13 +74,14 @@ extension ViewController: UITableViewDataSource {
         
         
         
-        if data[indexPath.row].artworkUrl100Image == nil {
-            guard let url = URL(string: data[indexPath.row].artworkUrl100) else { print("url변환 실패"); return cell}
-            cell.imageView?.image = url.convertToUIImage()
-        } else {
-            cell.imageView?.image = data[indexPath.row].artworkUrl100Image
-        }
+//        if data[indexPath.row].artworkUrl100Image == nil {
+//            guard let url = URL(string: data[indexPath.row].artworkUrl100) else { print("url변환 실패"); return cell}
+//            cell.imageView?.image = url.convertToUIImage()
+//        } else {
+//            cell.imageView?.image = data[indexPath.row].artworkUrl100Image
+//        }
         
+        cell.imageView?.image = data[indexPath.row].artworkUrl100Image
         cell.textLabel?.text = data[indexPath.row].artistName
         cell.detailTextLabel?.text = data[indexPath.row].trackName
         cell.accessoryType = .detailButton
@@ -89,6 +104,7 @@ extension ViewController: UISearchResultsUpdating {
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         print("--------------------------[SearchBarTextDidEndEditing]--------------------------")
         data.removeAll()
+        self.activityIndicatorView.startAnimating()
         
         inputText = searchBar.text ?? ""
         guard inputText != "" else { return }
@@ -104,9 +120,9 @@ extension ViewController: UISearchResultsUpdating {
             case .failure(let error):
                 print("--------------------------[Failure]--------------------------")
                 print(error)
+                self.activityIndicatorView.stopAnimating()
             case .success(let value):
                 print("--------------------------[Success]--------------------------")
-                
                 
                 guard let valueDict = value as? [String: Any],
                     let results = valueDict["results"] as? [[String: Any]]
@@ -118,9 +134,9 @@ extension ViewController: UISearchResultsUpdating {
 //                        let trackName = $0["trackName"] as? String,
 //                        let artworkUrl100 = $0["artworkUrl100"] as? String else { print("artistName 변환실패"); return () }
 //
-////                    guard let url = URL(string: artworkUrl100) else { print("url주소 변환 실패"); return () }
-//                    //                    let image = url.convertToUIImage()
-//                    //                    let image = (url.convertToUIImage())?.resize(scale: 15)
+//                    guard let url = URL(string: artworkUrl100) else { print("url주소 변환 실패"); return () }
+//                        let image = url.convertToUIImage()
+//                        let image = (url.convertToUIImage())?.resize(scale: 15)
 //
 //
 //                    let song = Song(artistName: artistName, trackName: trackName, artworkUrl100: artworkUrl100, artworkUrl100Image: nil)
@@ -134,9 +150,9 @@ extension ViewController: UISearchResultsUpdating {
                 //                    print("--------------------------[image값 입력시작]--------------------------")
                 //                    for i in 0..<self.data.count {
                 //                        guard let url = URL(string: self.data[i].artworkUrl100) else { print("url주소 변환 실패"); return () }
-                ////                        self.data[i].artworkUrl100Image = (url.convertToUIImage())?.resize(scale: 0.2)
-                ////                        self.data[i].artworkUrl100Image = url.convertToUIImageWithSession()
-                ////                        self.data[i].artworkUrl100Image = url.convertToUIImage()
+                //                        self.data[i].artworkUrl100Image = (url.convertToUIImage())?.resize(scale: 0.2)
+                //                        self.data[i].artworkUrl100Image = url.convertToUIImageWithSession()
+                //                        self.data[i].artworkUrl100Image = url.convertToUIImage()
                 //
                 //                        let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
                 //                            guard error == nil else { return print(error!.localizedDescription)}
@@ -149,19 +165,25 @@ extension ViewController: UISearchResultsUpdating {
                 //                        dataTask.resume()
                 //
                 //                    }
-                ////                }
+                //                }
                 
                 // =================================== session으로 테스트 ===================================
-                results.forEach{
+                var dataTaskCompleted = false
+                
+//                let semaphore = DispatchSemaphore(value: 0)
+                
+                results.forEach {
                     guard let artistName = $0["artistName"] as? String,
                         let trackName = $0["trackName"] as? String,
                         let artworkUrl100 = $0["artworkUrl100"] as? String else { print("artistName 변환실패"); return () }
+                    
                     guard let url = URL(string: artworkUrl100) else { print("url주소 변환 실패"); return () }
+                    
                     
                     
                     let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
                         guard error == nil else { return print(error!.localizedDescription)}
-                        guard let data = data else { return print("Error: data is not exist")}
+                        guard let data = data else { return print("Error: data not exist")}
                         
                         let image = UIImage(data: data) ?? UIImage()
                         
@@ -170,11 +192,36 @@ extension ViewController: UISearchResultsUpdating {
                         self.data.append(song)
                         
                         DispatchQueue.main.async {
+//                            self.itunesTableView.reloadData()
+//                            self.activityIndicatorView.stopAnimating()
+                            
+
+                        if self.data.count == results.count {
                             self.itunesTableView.reloadData()
+                            }
                         }
+                        
+                        
+                        
+                        if let last = results.last!["artworkUrl100"] as? String, last == artworkUrl100 {
+                            // [Question??] forEach문에서 마지막인 시점을 잡을방법이 이거밖에없나???
+                            //                            DispatchQueue.main.async {
+                            //                                self.itunesTableView.reloadData()
+                            //                                self.activityIndicatorView.stopAnimating()
+                            //                            }
+                            print("--------------------------[forEach문 마지막]--------------------------")
+                        }
+                        
+//                        semaphore.signal()
                     }
+                    
                     dataTask.resume()
+//                    semaphore.wait()
+                    
                 }
+                
+                print("end")
+//                self.itunesTableView.reloadData()
             }
         }
     }
@@ -184,6 +231,13 @@ extension ViewController: UISearchResultsUpdating {
         print("--------------------------[ListButtonClicked]--------------------------")
     }
     
+    @objc func didReceiveWhenGettingDataCompleted(_ sender: Notification) {
+        print("--------------------------[didReceive Notification 메소드 실행]--------------------------")
+        DispatchQueue.main.async {
+            self.itunesTableView.reloadData()
+            self.activityIndicatorView.stopAnimating()
+        }
+    }
     
     
 }
